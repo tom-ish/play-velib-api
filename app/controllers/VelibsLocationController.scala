@@ -27,7 +27,7 @@ class VelibsLocationController @Inject()(ws: WSClient, cc: ControllerComponents)
         */
 
       val wsRequest: WSRequest = ws.url(apiURL)
-     /*
+
       val wsResponse = wsRequest.addQueryStringParameters(
         ("q" -> s"station_name%3D%22${location.keyword}%22"),
         ("facet" -> "overflowactivation"),
@@ -36,9 +36,9 @@ class VelibsLocationController @Inject()(ws: WSClient, cc: ControllerComponents)
         ("facet" -> "station_state")
       ).get
 
-      */
-      wsRequest.get() map {
-//      wsResponse map {
+
+//      wsRequest.get() map {
+      wsResponse map {
         case response : WSResponse => Ok(views.html.api_results(response.json.toString))
         case _ => MethodNotAllowed
       }
