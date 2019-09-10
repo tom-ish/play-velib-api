@@ -1,0 +1,20 @@
+@(keywordForm: Form[models.LocationData], callAPI: String)(implicit r: RequestHeader, request: MessagesRequestHeader)
+@import helper._
+@main("Welcome to Play") {
+  <h1>Welcome to Play!</h1>
+
+  <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value">
+  <input type="hidden" id="callAPI" value="@callAPI">
+  @helper.form(action = routes.VelibsLocationController.getSplioVelibs, Symbol("class") -> "form-horizontal") {
+  @CSRF.formField
+  @helper.inputText(keywordForm("location"))
+    <div class="form-actions">
+      <button id="getButton" type="submit">Get Splio closest Velibs station</button>
+    </div>
+  }
+
+
+  <div id="resultContent"></div>
+
+}
+
