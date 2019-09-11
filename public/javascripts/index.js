@@ -6,7 +6,8 @@ $(document).ready(function() {
     var callAPI = $("#callAPI").val();
 
     var apiResult = $("#resultContent").val();
-
+    console.log(apiResult);
+//    var apiResultJSON = JSON.parse(apiResult);
     $("#resultContent").html(apiResult);
 
 });
