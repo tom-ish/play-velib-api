@@ -7,7 +7,6 @@ $(document).ready(function() {
 
     var apiResult = $("#resultContent").val();
 
-    var apiResultJSON = JSON.parse(apiResult);
-    $("#resultContent").html(apiResultJSON);
+    $("#resultContent").html(apiResult);
 
 });
