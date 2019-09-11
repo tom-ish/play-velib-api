@@ -1,9 +1,11 @@
-@(keywordForm: Form[models.LocationData], callAPI: String)(implicit r: RequestHeader, request: MessagesRequestHeader)
+@(keywordForm: Form[models.LocationData], callAPI: String, apiResult: String)(implicit r: RequestHeader, request: MessagesRequestHeader)
 @import helper._
+
 @main("Welcome to Play") {
   <h1>Welcome to Play!</h1>
 
   <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value">
+
   <input type="hidden" id="callAPI" value="@callAPI">
   @b4.vertical.formCSRF(routes.VelibsLocationController.getSplioVelibs) { implicit vfc =>
     @b4.text(
@@ -15,7 +17,7 @@
     </div>
   }
 
-  <div id="resultContent"></div>
+  <div id="resultContent">@apiResult</div>
 
 }
 

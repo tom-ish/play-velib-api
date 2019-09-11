@@ -20,6 +20,6 @@ class HomeController @Inject()(cc: MessagesControllerComponents) extends Message
    * a path of `/`.
    */
   def index() = Action { implicit messagesRequest: MessagesRequest[AnyContent] =>
-    Ok(views.html.index(LocationData.form, routes.VelibsLocationController.getSplioVelibs().toString))
+    Ok(views.html.index(LocationData.form, routes.VelibsLocationController.getSplioVelibs().toString, ""))
   }
 }

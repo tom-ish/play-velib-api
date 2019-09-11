@@ -3,17 +3,17 @@ package controllers
 import javax.inject.Inject
 import models.{Location, LocationData}
 import play.api.data.Form
-import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, MessagesRequest, Request}
+import play.api.mvc.{Action, AnyContent, MessagesAbstractController, MessagesControllerComponents, MessagesRequest, Request}
 import play.api.libs.ws._
 import play.api.http.HttpEntity
 import play.filters.csrf.CSRF
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class VelibsLocationController @Inject()(ws: WSClient, cc: ControllerComponents) (implicit executionContext: ExecutionContext)
-  extends AbstractController(cc)  {
+class VelibsLocationController @Inject()(ws: WSClient, cc: MessagesControllerComponents)(implicit executionContext: ExecutionContext)
+  extends MessagesAbstractController(cc)  {
 
-  def getSplioVelibs() : Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
+  def getSplioVelibs() : Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
     def failure = { formWithErrors : Form[LocationData] =>
       Future.successful(BadRequest)
     }
@@ -28,7 +28,11 @@ class VelibsLocationController @Inject()(ws: WSClient, cc: ControllerComponents)
       ).get
 
       wsResponse map {
-        case response : WSResponse => Ok(views.html.api_results(response.json.toString))
+        case response : WSResponse =>
+          Ok(views.html.index(
+            LocationData.form,
+            routes.VelibsLocationController.getSplioVelibs().toString,
+            response.json.toString))
         case _ => MethodNotAllowed
       }
     }
