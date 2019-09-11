@@ -34,14 +34,24 @@ object Tools {
 
     fields match {
       case velibStationObject : JsObject =>
-        val nbDock = (velibStationObject \ "nbedock").get
-        val nbFreeDock = (velibStationObject \ "nbfreeedock").get
+        val stationName = (velibStationObject \ "station_name").get
+        val nbeDock = (velibStationObject \ "nbedock").get
+        val nbFreeeDock = (velibStationObject \ "nbfreeedock").get
+        val nbeBike = (velibStationObject \ "nbebike").get
+
+        val nbDock = (velibStationObject \ "nbdock").get
+        val nbFreeDock = (velibStationObject \ "nbfreedock").get
         val nbBike = (velibStationObject \ "nbbike").get
 
-        rslt += s"this station contains:<br/>" +
-          s"${nbDock.toString()} Velibs docks <br/>" +
-          s"${nbFreeDock.toString()} Velibs docks free <br/>" +
-          s"${nbBike.toString()} Velibs available <br/>"
+        rslt += s"Station ${stationName}:<br/>" +
+          s"  eDocks :<br/>" +
+          s"${nbeDock.toString()} Velibs eDocks <br/>" +
+          s"${nbFreeeDock.toString()} Velibs eDocks free <br/>" +
+          s"${nbeBike.toString()} Velibs eBikes available <br/>" +
+          s"  Docks :<br/>" +
+          s"${nbDock.toString()} Velibs Docks <br/>" +
+          s"${nbFreeDock.toString()} Velibs Docks free <br/>" +
+          s"${nbBike.toString()} Velibs Bikes available <br/>"
       case _ =>
         rslt += "error: js not recognized"
     }
