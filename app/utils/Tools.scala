@@ -37,12 +37,12 @@ object Tools {
   def mkTabLegends(): String = {
     """    <div class="row">
       |      <div class="col">station name</div>
-      |      <div class="col">nb eDock</div>
-      |      <div class="col">nb free eDock</div>
-      |      <div class="col">nb eBike</div>
-      |      <div class="col">nb Dock</div>
-      |      <div class="col">nb free Dock</div>
-      |      <div class="col">nb Bike</div>
+      |      <div class="col">eDock(s)</div>
+      |      <div class="col">free eDock(s)</div>
+      |      <div class="col">eVelib(s)</div>
+      |      <div class="col">Dock(s)</div>
+      |      <div class="col">free Dock(s)</div>
+      |      <div class="col">Velib(s)</div>
       |    </div>""".stripMargin
   }
 
@@ -60,16 +60,7 @@ object Tools {
         val nbDock = (velibStationObject \ "nbdock").get
         val nbFreeDock = (velibStationObject \ "nbfreedock").get
         val nbBike = (velibStationObject \ "nbbike").get
-//
-//        rslt += """<div class=\"row\">\n" +
-//            s"<div class=\"col\">${stationName}</div>\n" +
-//            s"<div class=\"col\">${nbeDock.toString()}</div>\n" +
-//            s"<div class=\"col\">${nbFreeeDock.toString()}</div>\n" +
-//            s"<div class=\"col\">${nbeBike.toString()}</div>\n" +
-//            s"<div class=\"col\">${nbDock.toString()}</div>\n" +
-//            s"<div class=\"col\">${nbFreeDock.toString()}</div>\n" +
-//            s"<div class=\"col\">${nbBike.toString()}</div>\n" +
-//          "</div>"""
+
 
         rslt += """    <div class="row">
                   |      <div class="col">""" + stationName + """</div>
@@ -80,17 +71,7 @@ object Tools {
                   |      <div class="col">""" + nbFreeDock.toString() + """</div>
                   |      <div class="col">""" + nbBike.toString() + """</div>
                   |    </div>""".stripMargin
-/*
-        rslt += s"Station ${stationName}:<br/>" +
-          s"  eDocks :<br/>" +
-          s"${nbeDock.toString()} Velibs eDocks <br/>" +
-          s"${nbFreeeDock.toString()} Velibs eDocks free <br/>" +
-          s"${nbeBike.toString()} Velibs eBikes available <br/>" +
-          s"  Docks :<br/>" +
-          s"${nbDock.toString()} Velibs Docks <br/>" +
-          s"${nbFreeDock.toString()} Velibs Docks free <br/>" +
-          s"${nbBike.toString()} Velibs Bikes available <br/>"
-          */
+
 
       case _ =>
         rslt += "error: js not recognized"
