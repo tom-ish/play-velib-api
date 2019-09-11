@@ -21,7 +21,6 @@ object Tools {
         recordsArray.foreach {jsValue =>
           rslt += "<br/>" + mkVelibRecord(jsValue.as[JsObject]) + "<br/>"
         }
-        rslt += nbItems
       case  _ => rslt += "error"
     }
 
