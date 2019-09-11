@@ -10,7 +10,9 @@ object Tools {
 
     val records = (jsObject \ "records").get
     records match {
-      case JsArray(value) => rslt += value.toString()
+      case JsArray(recordsArray) =>
+        recordsArray.foreach(rslt += _.toString())
+//        rslt += recordsArray.toString()
       case  _ => rslt += "error"
     }
 
