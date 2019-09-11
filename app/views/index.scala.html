@@ -17,7 +17,7 @@
     }
   }
 
-  @if(!apiResult.length() <= 0){
+  @if(apiResult.length() > 0){
     <div id="resultContent">@JsonHandler.mkJSON(apiResult)</div>
   }
 
