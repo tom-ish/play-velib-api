@@ -9,7 +9,7 @@ object Tools {
 
     records match {
       case JsSuccess(velibStation, path) => rslt += Json.prettyPrint(velibStation) + "\n"
-      case JsError(errors) => rslt += "error"
+      case JsError(errors) => rslt += errors.mkString
     }
 
     rslt
