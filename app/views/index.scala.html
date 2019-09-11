@@ -5,16 +5,14 @@
 
   <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value">
   <input type="hidden" id="callAPI" value="@callAPI">
-  @helper.form(action = routes.VelibsLocationController.getSplioVelibs, Symbol("class") -> "form-horizontal") {
-      @b4.vertical.formCSRF(routes.VelibsLocationController.getSplioVelibs) { implicit vfc =>
-        @b4.text(
-          keywordForm("location"),
-          Symbol("placeholder") -> "Please put a Velib Station name or the closest Metro Station name"
-        )
-        <div class="form-actions">
-            <button id="getButton" class="btn btn-default" type="submit">Get Splio closest Velibs station</button>
-        </div>
-      }
+  @b4.vertical.formCSRF(routes.VelibsLocationController.getSplioVelibs) { implicit vfc =>
+    @b4.text(
+      keywordForm("location"),
+      Symbol("placeholder") -> "Please put a Velib Station name or the closest Metro Station name"
+    )
+    <div class="form-actions">
+        <button id="getButton" class="btn btn-default" type="submit">Get Splio closest Velibs station</button>
+    </div>
   }
 
   <div id="resultContent"></div>
