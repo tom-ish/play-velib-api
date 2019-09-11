@@ -5,4 +5,9 @@ $(document).ready(function() {
     var keywordInput = $("#keywordInput").val();
     var callAPI = $("#callAPI").val();
 
+    var apiResult = $("#resultContent").val();
+
+    var apiResultJSON = JSON.parse(apiResult);
+    $("#resultContent").html(apiResultJSON);
+
 });
