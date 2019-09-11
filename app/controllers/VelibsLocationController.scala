@@ -20,21 +20,13 @@ class VelibsLocationController @Inject()(ws: WSClient, cc: ControllerComponents)
     def success = { locationData : LocationData =>
       val location = Location(locationData.keyword)
       val apiURL = s"https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel"
-      /* +
-        s"&q=station_name%3D%22" +
-        s"${location.keyword}" +
-        s"%22&facet=overflowactivation&facet=creditcard&facet=kioskstate&facet=station_state"
-        */
 
       val wsRequest: WSRequest = ws.url(apiURL)
-
       val wsResponse = wsRequest.addQueryStringParameters(
         ("q" -> s"station_name:${location.keyword}+OR+station:${location.keyword}"),
         ("pretty_print" -> "true")
       ).get
 
-
-//      wsRequest.get() map {
       wsResponse map {
         case response : WSResponse => Ok(views.html.api_results(response.json.toString))
         case _ => MethodNotAllowed

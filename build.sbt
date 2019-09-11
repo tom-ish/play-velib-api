@@ -9,7 +9,8 @@ scalaVersion := "2.13.0"
 
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3" % Test
-libraryDependencies += ws
+libraryDependencies += "com.adrianhurt" %% "play-bootstrap" % "1.5.1-P27-B4" // little bit of Bootstrap within Twirl templates
+libraryDependencies += ws // this enables requesting velibs opendata's API calls
 libraryDependencies += ehcache
 
 // Adds additional packages into Twirl
