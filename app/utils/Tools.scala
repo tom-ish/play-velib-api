@@ -10,8 +10,8 @@ object Tools {
 
     val records = (jsObject \ "records").get
     records match {
-      case JsArray(value: JsValue) => rslt += Json.prettyPrint(value) + "\n"
-      case  _ => rslt += "not found"
+      case JsArray(value) => rslt += value.toString()
+      case  _ => rslt += "error"
     }
 
 //    val records = (jsObject \ "records").transform(jsonTransformer)
