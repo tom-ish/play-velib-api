@@ -32,10 +32,15 @@ object Tools {
     val fields = (jsObject \ "fields").get
 
     fields match {
+      case JsString(value) => rslt += value
+      case JsObject(value) => rslt += "jsObject" + value.toString()
       case JsArray(fieldsArray) =>
-        fieldsArray.foreach {
-          rslt += _.toString() + "\n"
-        }
+        rslt += "jsArray" + fieldsArray.toString()
+      //        fieldsArray.foreach {
+      //          rslt += _.toString() + "\n"
+      //        }
+
+      case _ => rslt += "othr errors"
     }
 //    jsObject match {
 //      case (value) =>
