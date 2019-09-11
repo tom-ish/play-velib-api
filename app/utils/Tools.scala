@@ -3,7 +3,6 @@ package utils
 import play.api.libs.json._
 
 object Tools {
-  val jsonTransformer = (__ \ Symbol("records")).json.pick
 
   def mkHtml(jsObject: JsObject): String = {
     var rslt = ""
@@ -18,12 +17,6 @@ object Tools {
       case  _ => rslt += "error"
     }
 
-//    val records = (jsObject \ "records").transform(jsonTransformer)
-//    records match {
-//      case JsSuccess(velibStation, path) => rslt += Json.prettyPrint(velibStation) + "\n"
-//      case JsError(errors) => rslt += errors.mkString
-//    }
-
     rslt
   }
 
@@ -32,15 +25,18 @@ object Tools {
     val fields = (jsObject \ "fields").get
 
     fields match {
-      case JsString(value) => rslt += value
-      case JsObject(value) => rslt += "jsObject" + value.toString()
-      case JsArray(fieldsArray) =>
-        rslt += "jsArray" + fieldsArray.toString()
-      //        fieldsArray.foreach {
-      //          rslt += _.toString() + "\n"
-      //        }
+      case velibStationObject : JsObject =>
+        val nbDock = (velibStationObject \ "nbedock").get
+        val nbFreeDock = (velibStationObject \ "nbfreeedock").get
+        val nbBike = (velibStationObject \ "nbbike").get
+        val stationState = (velibStationObject \ "station_state").get
+        rslt += s"this station contains:\n ${nbDock.toString()} Velibs docks \n${nbFreeDock.toString()} Velibs docks free\n" +
+          s"${nbBike.toString()}\n "
 
-      case _ => rslt += "othr errors"
+      //        rslt += "jsObject" + value.toString()
+
+      case _ =>
+        rslt += "error: js not recognized"
     }
 //    jsObject match {
 //      case (value) =>
@@ -52,4 +48,5 @@ object Tools {
 //    }
     rslt
   }
+
 }
