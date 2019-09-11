@@ -8,6 +8,7 @@ $(document).ready(function() {
     var apiResult = $("#resultContent").val();
     console.log(apiResult);
 //    var apiResultJSON = JSON.parse(apiResult);
-    $("#resultContent").load(apiResult);
+    if(apiResult !== undefined)
+        $("#resultContent").html(apiResult);
 
 });
