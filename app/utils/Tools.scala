@@ -72,13 +72,13 @@ object Tools {
 //          "</div>"""
 
         rslt += """    <div class="row">
-                  |      <div class="col">$stationName</div>
-                  |      <div class="col">$nbeDock.toString()</div>
-                  |      <div class="col">$nbFreeeDock.toString()</div>
-                  |      <div class="col">$nbeBike.toString()</div>
-                  |      <div class="col">$nbDock.toString()</div>
-                  |      <div class="col">$nbFreeDock.toString()</div>
-                  |      <div class="col">$nbBike.toString()</div>
+                  |      <div class="col">""" + stationName + """</div>
+                  |      <div class="col">""" + nbeDock.toString() + """</div>
+                  |      <div class="col">""" + nbFreeeDock.toString() + """</div>
+                  |      <div class="col">""" + nbeBike.toString() + """</div>
+                  |      <div class="col">""" + nbDock.toString() + """</div>
+                  |      <div class="col">""" + nbFreeDock.toString() + """</div>
+                  |      <div class="col">""" + nbBike.toString() + """</div>
                   |    </div>""".stripMargin
 /*
         rslt += s"Station ${stationName}:<br/>" +
