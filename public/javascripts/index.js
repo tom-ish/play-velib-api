@@ -9,6 +9,6 @@ $(document).ready(function() {
     console.log(apiResult);
 //    var apiResultJSON = JSON.parse(apiResult);
     if(apiResult !== undefined)
-        $("#resultContent").html(apiResult);
+        $("#resultContent").load(apiResult);
 
 });
