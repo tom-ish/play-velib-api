@@ -10,8 +10,7 @@ object Tools {
 
     val records = (jsObject \ "records").get
     records match {
-      case JsArray(value: JsValue) => value.foreach((jsValue: JsValue) => rslt += Json.prettyPrint(jsValue) + "\n")
-      case record: JsObject => rslt += Json.prettyPrint(record) + "\n"
+      case JsArray(value: JsValue) => rslt += Json.prettyPrint(value) + "\n"
       case  _ => rslt += "not found"
     }
 
