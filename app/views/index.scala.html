@@ -1,4 +1,4 @@
-@(keywordForm: Form[models.LocationData], callAPI: String, apiResult: JsObject)(implicit r: RequestHeader, request: MessagesRequestHeader)
+@(keywordForm: Form[models.LocationData], callAPI: String, apiResult: String)(implicit r: RequestHeader, request: MessagesRequestHeader)
 @import helper._
 
 @main("Welcome to Play") {
@@ -12,12 +12,14 @@
       keywordForm("location"),
       Symbol("placeholder") -> "Please put a Velib Station name or the closest Metro Station name"
     )
-    @b4.submit('class -> "btn btn-secondary"){
+    @b4.submit(Symbol("class") -> "btn btn-secondary"){
       <i class="fa fa-ok"></i> Get Splio closest Velibs station
     }
   }
 
-  <div id="resultContent">@apiResult.toString</div>
+  @if(!apiResult.length() <= 0){
+    <div id="resultContent">@JsonHandler.mkJSON(apiResult)</div>
+  }
 
 }
 
