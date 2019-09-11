@@ -60,16 +60,26 @@ object Tools {
         val nbDock = (velibStationObject \ "nbdock").get
         val nbFreeDock = (velibStationObject \ "nbfreedock").get
         val nbBike = (velibStationObject \ "nbbike").get
+//
+//        rslt += """<div class=\"row\">\n" +
+//            s"<div class=\"col\">${stationName}</div>\n" +
+//            s"<div class=\"col\">${nbeDock.toString()}</div>\n" +
+//            s"<div class=\"col\">${nbFreeeDock.toString()}</div>\n" +
+//            s"<div class=\"col\">${nbeBike.toString()}</div>\n" +
+//            s"<div class=\"col\">${nbDock.toString()}</div>\n" +
+//            s"<div class=\"col\">${nbFreeDock.toString()}</div>\n" +
+//            s"<div class=\"col\">${nbBike.toString()}</div>\n" +
+//          "</div>"""
 
-        rslt += s"<div class=\"row\">\n" +
-            s"<div class=\"col\">${stationName}</div>\n" +
-            s"<div class=\"col\">${nbeDock.toString()}</div>\n" +
-            s"<div class=\"col\">${nbFreeeDock.toString()}</div>\n" +
-            s"<div class=\"col\">${nbeBike.toString()}</div>\n" +
-            s"<div class=\"col\">${nbDock.toString()}</div>\n" +
-            s"<div class=\"col\">${nbFreeDock.toString()}</div>\n" +
-            s"<div class=\"col\">${nbBike.toString()}</div>\n" +
-          "</div>"
+        rslt += """    <div class="row">
+                  |      <div class="col">${stationName}</div>
+                  |      <div class="col">${nbeDock.toString()}</div>
+                  |      <div class="col">${nbFreeeDock.toString()}</div>
+                  |      <div class="col">${nbeBike.toString()}</div>
+                  |      <div class="col">${nbDock.toString()}</div>
+                  |      <div class="col">${nbFreeDock.toString()}</div>
+                  |      <div class="col">${nbBike.toString()}</div>
+                  |    </div>""".stripMargin
 /*
         rslt += s"Station ${stationName}:<br/>" +
           s"  eDocks :<br/>" +
