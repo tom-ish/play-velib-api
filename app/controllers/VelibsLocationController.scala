@@ -33,7 +33,7 @@ class VelibsLocationController @Inject()(ws: WSClient, cc: MessagesControllerCom
           Ok(views.html.index(
             LocationData.form,
             routes.VelibsLocationController.getSplioVelibs().toString,
-            response.json.toString))
+            response.json.as[JsObject]))
         case _ => MethodNotAllowed
       }
     }
