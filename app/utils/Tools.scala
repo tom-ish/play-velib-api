@@ -15,7 +15,7 @@ object Tools {
           rslt += "There is no Velib station near the specified station"
         else if(nbItems == 1)
           rslt += s"There is 1 Velib station near $location"
-        else if(nbItems < 1)
+        else if(nbItems > 1)
           rslt += s"There are $nbItems Velibs stations near $location"
 
         recordsArray.foreach {jsValue =>
