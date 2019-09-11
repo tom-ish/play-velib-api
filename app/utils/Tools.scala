@@ -9,22 +9,41 @@ object Tools {
 
     val records = (jsObject \ "records").get
     records match {
-      case JsArray(recordsArray) =>
+      case JsArray(recordsArray) => {
         val nbItems = recordsArray.length
-        if(nbItems == 0)
+        if (nbItems == 0)
           rslt += "There is no Velib station near the specified station"
-        else if(nbItems == 1)
-          rslt += s"There is 1 Velib station near $location"
-        else if(nbItems > 1)
-          rslt += s"There are $nbItems Velibs stations near $location"
+        else {
+          if (nbItems == 1)
+            rslt += s"There is 1 Velib station near $location"
+          else if (nbItems > 1)
+            rslt += s"There are $nbItems Velibs stations near $location"
 
-        recordsArray.foreach {jsValue =>
-          rslt += "<br/>" + mkVelibRecord(jsValue.as[JsObject]) + "<br/>"
+          rslt += "<br/>"
+          rslt += mkTabLegends()
+
+          recordsArray.foreach { jsValue =>
+            rslt += mkVelibRecord(jsValue.as[JsObject])
+          }
+
         }
+      }
       case  _ => rslt += "error"
     }
 
     rslt
+  }
+
+  def mkTabLegends(): String = {
+    """    <div class="row">
+      |      <div class="col">station name</div>
+      |      <div class="col">nb eDock</div>
+      |      <div class="col">nb free eDock</div>
+      |      <div class="col">nb eBike</div>
+      |      <div class="col">nb Dock</div>
+      |      <div class="col">nb free Dock</div>
+      |      <div class="col">nb Bike</div>
+      |    </div>""".stripMargin
   }
 
   def mkVelibRecord(jsObject: JsObject): String = {
@@ -42,6 +61,16 @@ object Tools {
         val nbFreeDock = (velibStationObject \ "nbfreedock").get
         val nbBike = (velibStationObject \ "nbbike").get
 
+        rslt += s"<div class=\"row\">\n" +
+            s"<div class=\"col\">${stationName}</div>\n" +
+            s"<div class=\"col\">${nbeDock.toString()}</div>\n" +
+            s"<div class=\"col\">${nbFreeeDock.toString()}</div>\n" +
+            s"<div class=\"col\">${nbeBike.toString()}</div>\n" +
+            s"<div class=\"col\">${nbDock.toString()}</div>\n" +
+            s"<div class=\"col\">${nbFreeDock.toString()}</div>\n" +
+            s"<div class=\"col\">${nbBike.toString()}</div>\n" +
+          "</div>"
+/*
         rslt += s"Station ${stationName}:<br/>" +
           s"  eDocks :<br/>" +
           s"${nbeDock.toString()} Velibs eDocks <br/>" +
@@ -51,6 +80,8 @@ object Tools {
           s"${nbDock.toString()} Velibs Docks <br/>" +
           s"${nbFreeDock.toString()} Velibs Docks free <br/>" +
           s"${nbBike.toString()} Velibs Bikes available <br/>"
+          */
+
       case _ =>
         rslt += "error: js not recognized"
     }

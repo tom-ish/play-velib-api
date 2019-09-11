@@ -3,24 +3,36 @@
 @import helper._
 
 @main("Welcome to Play") {
-  <h1>Welcome to Play!</h1>
+  <h1 class="center">Welcome to Play!</h1>
 
   <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value">
-
   <input type="hidden" id="callAPI" value="@callAPI">
-  @b4.vertical.formCSRF(routes.VelibsLocationController.getSplioVelibs) { implicit vfc =>
-    @b4.text(
-      keywordForm("location"),
-      Symbol("placeholder") -> "Please put a Velib Station name or the closest Metro Station name"
-    )
-    @b4.submit(Symbol("class") -> "btn btn-secondary"){
-      <i class="fa fa-ok"></i> Get Splio closest Velibs station
+
+  <div class="form-content center">
+    <div class="left-align">
+      <dl>
+        <dt>Please enter either<br/></dt>
+        <dd>Velib station name or</dd>
+        <dd>Metro station name</dd>
+      </dl>
+      You will see the Velibs' docks availability if such docks exists near the specified location.<br/>
+    </div>
+
+    @b4.vertical.formCSRF(routes.VelibsLocationController.getSplioVelibs) { implicit vfc =>
+      @b4.text(
+        keywordForm("location"),
+        Symbol("placeholder") -> "Velib or Metro Station name"
+      )
+      <div class="center">
+        @b4.submit(Symbol("class") -> "btn btn-secondary"){
+          <i class="fa fa-ok"></i> Get Splio closest Velibs station
+        }
+      </div>
     }
-  }
+  </div>
 
   @if(apiResult.length() > 0){
-    <div id="resultContent">@Html(apiResult)</div>
+    <div id="resultContent" class="rslt-contents">@Html(apiResult)</div>
   }
-
 }
 
