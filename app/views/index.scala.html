@@ -1,5 +1,5 @@
 @import play.api.libs.json.JsObject
-@(keywordForm: Form[models.LocationData], callAPI: String, apiResult: JsObject)(implicit r: RequestHeader, request: MessagesRequestHeader)
+@(keywordForm: Form[models.LocationData], callAPI: String, apiResult: String)(implicit r: RequestHeader, request: MessagesRequestHeader)
 @import helper._
 
 @main("Welcome to Play") {
@@ -19,7 +19,7 @@
   }
 
   @if(apiResult.length() > 0){
-    <div id="resultContent">@apiResult.toString</div>
+    <div id="resultContent">@apiResult</div>
   }
 
 }

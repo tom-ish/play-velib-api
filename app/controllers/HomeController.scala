@@ -3,7 +3,7 @@ package controllers
 import javax.inject._
 import models.LocationData
 import play.api._
-import play.api.libs.json.Json
+import play.api.libs.json.{JsObject, Json}
 import play.api.mvc._
 
 /**
@@ -21,6 +21,6 @@ class HomeController @Inject()(cc: MessagesControllerComponents) extends Message
    * a path of `/`.
    */
   def index() = Action { implicit messagesRequest: MessagesRequest[AnyContent] =>
-    Ok(views.html.index(LocationData.form, routes.VelibsLocationController.getSplioVelibs().toString, Json.obj()))
+    Ok(views.html.index(LocationData.form, routes.VelibsLocationController.getSplioVelibs().toString, ""))
   }
 }

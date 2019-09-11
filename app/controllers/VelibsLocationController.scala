@@ -8,6 +8,7 @@ import play.api.libs.ws._
 import play.api.http.HttpEntity
 import play.api.libs.json.JsObject
 import play.filters.csrf.CSRF
+import utils.Tools
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -30,10 +31,11 @@ class VelibsLocationController @Inject()(ws: WSClient, cc: MessagesControllerCom
 
       wsResponse map {
         case response : WSResponse =>
+          val renderedHtml = Tools.mkHtml(response.json.as[JsObject])
           Ok(views.html.index(
             LocationData.form,
             routes.VelibsLocationController.getSplioVelibs().toString,
-            response.json.as[JsObject]))
+            renderedHtml))
         case _ => MethodNotAllowed
       }
     }
