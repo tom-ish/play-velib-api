@@ -6,6 +6,7 @@ import play.api.data.Form
 import play.api.mvc.{Action, AnyContent, MessagesAbstractController, MessagesControllerComponents, MessagesRequest, Request}
 import play.api.libs.ws._
 import play.api.http.HttpEntity
+import play.api.libs.json.JsObject
 import play.filters.csrf.CSRF
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -32,7 +33,7 @@ class VelibsLocationController @Inject()(ws: WSClient, cc: MessagesControllerCom
           Ok(views.html.index(
             LocationData.form,
             routes.VelibsLocationController.getSplioVelibs().toString,
-            response.json.toString))
+            response.json.as[JsObject]))
         case _ => MethodNotAllowed
       }
     }

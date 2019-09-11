@@ -1,4 +1,4 @@
-@(keywordForm: Form[models.LocationData], callAPI: String, apiResult: String)(implicit r: RequestHeader, request: MessagesRequestHeader)
+@(keywordForm: Form[models.LocationData], callAPI: String, apiResult: JsObject)(implicit r: RequestHeader, request: MessagesRequestHeader)
 @import helper._
 
 @main("Welcome to Play") {
@@ -17,7 +17,7 @@
     }
   }
 
-  <div id="resultContent">@apiResult</div>
+  <div id="resultContent">@apiResult.toString</div>
 
 }
 
