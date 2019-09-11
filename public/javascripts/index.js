@@ -8,6 +8,6 @@ $(document).ready(function() {
     var apiResult = $("#resultContent").val();
     console.log(apiResult);
 //    var apiResultJSON = JSON.parse(apiResult);
-    $("#resultContent").html(apiResult);
+    $("#resultContent").load(apiResult);
 
 });
