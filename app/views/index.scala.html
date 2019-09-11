@@ -12,9 +12,9 @@
       keywordForm("location"),
       Symbol("placeholder") -> "Please put a Velib Station name or the closest Metro Station name"
     )
-    <div class="form-actions">
-        <button id="getButton" class="btn btn-default" type="submit">Get Splio closest Velibs station</button>
-    </div>
+    @b4.submit('class -> "btn btn-secondary"){
+      <i class="fa fa-ok"></i> Get Splio closest Velibs station
+    }
   }
 
   <div id="resultContent">@apiResult</div>
