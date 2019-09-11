@@ -29,7 +29,8 @@ class VelibsLocationController @Inject()(ws: WSClient, cc: ControllerComponents)
       val wsRequest: WSRequest = ws.url(apiURL)
 
       val wsResponse = wsRequest.addQueryStringParameters(
-        ("q" -> s"station_name%3D${location.keyword}")
+        ("q" -> s"station_name:${location.keyword}+OR+station:${location.keyword}"),
+        ("pretty_print" -> "true")
       ).get
 
 
