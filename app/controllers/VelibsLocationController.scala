@@ -31,7 +31,7 @@ class VelibsLocationController @Inject()(ws: WSClient, cc: MessagesControllerCom
 
       wsResponse map {
         case response : WSResponse =>
-          val renderedHtml = Tools.mkHtml(response.json.as[JsObject])
+          val renderedHtml = Tools.mkHtml(response.json.as[JsObject], location.keyword)
           Ok(views.html.index(
             LocationData.form,
             routes.VelibsLocationController.getSplioVelibs().toString,

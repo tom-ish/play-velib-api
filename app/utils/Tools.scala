@@ -4,16 +4,23 @@ import play.api.libs.json._
 
 object Tools {
 
-  def mkHtml(jsObject: JsObject): String = {
+  def mkHtml(jsObject: JsObject, location: String): String = {
     var rslt = ""
 
     val records = (jsObject \ "records").get
     records match {
       case JsArray(recordsArray) =>
+        val nbItems = recordsArray.length
+        if(nbItems == 0)
+          rslt += "There is no Velib station near the specified station"
+        else if(nbItems == 1)
+          rslt += s"There is 1 Velib station near $location"
+        else if(nbItems < 1)
+          rslt += s"There are $nbItems Velibs stations near $location"
+
         recordsArray.foreach {jsValue =>
-          rslt += mkVelibRecord(jsValue.as[JsObject])
+          rslt += "<br/>" + mkVelibRecord(jsValue.as[JsObject]) + "<br/>"
         }
-//        rslt += recordsArray.toString()
       case  _ => rslt += "error"
     }
 
@@ -29,23 +36,14 @@ object Tools {
         val nbDock = (velibStationObject \ "nbedock").get
         val nbFreeDock = (velibStationObject \ "nbfreeedock").get
         val nbBike = (velibStationObject \ "nbbike").get
-        val stationState = (velibStationObject \ "station_state").get
-        rslt += s"this station contains:\n ${nbDock.toString()} Velibs docks \n${nbFreeDock.toString()} Velibs docks free\n" +
-          s"${nbBike.toString()}\n "
 
-      //        rslt += "jsObject" + value.toString()
-
+        rslt += s"this station contains:<br/>" +
+          s"${nbDock.toString()} Velibs docks <br/>" +
+          s"${nbFreeDock.toString()} Velibs docks free <br/>" +
+          s"${nbBike.toString()} Velibs available <br/>"
       case _ =>
         rslt += "error: js not recognized"
     }
-//    jsObject match {
-//      case (value) =>
-//        value match {
-//          case Map("fields", fields: JsValue) =>
-//        }
-//        rslt += s"jsObject => ${value.toString}\n"
-//      case _ => rslt += "record error"
-//    }
     rslt
   }
 
